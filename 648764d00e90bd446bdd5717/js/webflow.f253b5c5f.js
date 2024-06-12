@@ -1292,9 +1292,6 @@
           if (loaded) {
             return;
           }
-          if (/\?edit/.test(location.hash)) {
-            loadEditor();
-          }
         }
         function load() {
           loaded = true;
