@@ -12070,7 +12070,6 @@
         var animate = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || function(fn) {
           window.setTimeout(fn, 15);
         };
-        var rootTag = Webflow.env("editor") ? ".w-editor-body" : "body";
         var headerSelector = "header, " + rootTag + " > .header, " + rootTag + " > .w-nav:not([data-no-scroll])";
         var emptyHrefSelector = 'a[href="#"]';
         var localHrefSelector = 'a[href*="#"]:not(.w-tab-link):not(' + emptyHrefSelector + ")";
