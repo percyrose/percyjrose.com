@@ -1342,27 +1342,6 @@
         function cleanSlashes(url) {
           return url.replace(/([^:])\/\//g, "$1/");
         }
-        function checkThirdPartyCookieSupport(callback) {
-          var iframe = window.document.createElement("iframe");
-          iframe.src = "https://webflow.com/site/third-party-cookie-check.html";
-          iframe.style.display = "none";
-          iframe.sandbox = "allow-scripts allow-same-origin";
-          var handleMessage = function(event) {
-            if (event.data === "WF_third_party_cookies_unsupported") {
-              cleanUpCookieCheckerIframe(iframe, handleMessage);
-              callback(false);
-            } else if (event.data === "WF_third_party_cookies_supported") {
-              cleanUpCookieCheckerIframe(iframe, handleMessage);
-              callback(true);
-            }
-          };
-          iframe.onerror = function() {
-            cleanUpCookieCheckerIframe(iframe, handleMessage);
-            callback(false);
-          };
-          window.addEventListener("message", handleMessage, false);
-          window.document.body.appendChild(iframe);
-        }
         function cleanUpCookieCheckerIframe(iframe, listener) {
           window.removeEventListener("message", listener, false);
           iframe.remove();
@@ -12553,65 +12532,6 @@
           });
           return status;
         }
-        function findFileUploads(form) {
-          var result = {};
-          form.find(':input[type="file"]').each(function(i, el) {
-            var field = $(el);
-            var name = field.attr("data-name") || field.attr("name") || "File " + (i + 1);
-            var value = field.attr("data-value");
-            if (typeof value === "string") {
-              value = $.trim(value);
-            }
-            result[name] = value;
-          });
-          return result;
-        }
-        const trackingCookieNameMap = {
-          _mkto_trk: "marketo"
-          // __hstc: 'hubspot',
-        };
-        function collectEnterpriseTrackingCookies() {
-          const cookies = document.cookie.split("; ").reduce(function(acc, cookie) {
-            const splitCookie = cookie.split("=");
-            const name = splitCookie[0];
-            if (name in trackingCookieNameMap) {
-              const mappedName = trackingCookieNameMap[name];
-              const value = splitCookie.slice(1).join("=");
-              acc[mappedName] = value;
-            }
-            return acc;
-          }, {});
-          return cookies;
-        }
-        function getStatus(field, type, name, value) {
-          var status = null;
-          if (type === "password") {
-            status = "Passwords cannot be submitted.";
-          } else if (field.attr("required")) {
-            if (!value) {
-              status = "Please fill out the required field: " + name;
-            } else if (emailField.test(field.attr("type"))) {
-              if (!emailValue.test(value)) {
-                status = "Please enter a valid email address for: " + name;
-              }
-            }
-          } else if (name === "g-recaptcha-response" && !value) {
-            status = "Please confirm you\u2019re not a robot.";
-          }
-          return status;
-        }
-        function exportedSubmitWebflow(data) {
-          preventDefault(data);
-          afterSubmit(data);
-        }
-        function submitMailChimp(data) {
-          reset(data);
-          var form = data.form;
-          var payload = {};
-          if (/^https/.test(loc.href) && !/^https/.test(data.action)) {
-            form.attr("method", "post");
-            return;
-          }
           preventDefault(data);
           var status = findFields(form, payload);
           if (status) {
