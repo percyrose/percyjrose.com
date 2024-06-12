@@ -12339,7 +12339,7 @@
         value: true
       });
       exports.default = hostedSubmitWebflow;
-      function hostedSubmitWebflow(reset, loc, Webflow, collectEnterpriseTrackingCookies, preventDefault, findFields, alert, findFileUploads, disableBtn, siteId, afterSubmit, $, formUrl) {
+      function hostedSubmitWebflow(reset, loc, Webflow, preventDefault, findFields, alert, findFileUploads, disableBtn, siteId, afterSubmit, $, formUrl) {
         return function(data) {
           reset(data);
           var form = data.form;
