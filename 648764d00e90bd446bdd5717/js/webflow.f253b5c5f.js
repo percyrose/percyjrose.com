@@ -12350,8 +12350,6 @@
             test: Webflow.env(),
             fields: {},
             fileUploads: {},
-            dolphin: /pass[\s-_]?(word|code)|secret|login|credentials/i.test(form.html()),
-            trackingCookies: collectEnterpriseTrackingCookies()
           };
           const wfFlow = form.attr("data-wf-flow");
           if (wfFlow) {
