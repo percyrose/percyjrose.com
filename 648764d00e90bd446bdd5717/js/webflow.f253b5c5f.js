@@ -13122,18 +13122,6 @@
             }
           };
         }
-        function outside(data) {
-          if (data.outside) {
-            $doc.off("click" + namespace, data.outside);
-          }
-          return function(evt) {
-            var $target = $(evt.target);
-            if (inEditor && $target.closest(".w-editor-bem-EditorOverlay").length) {
-              return;
-            }
-            outsideDebounced(data, $target);
-          };
-        }
         var outsideDebounced = debounce(function(data, $target) {
           if (!data.open) {
             return;
